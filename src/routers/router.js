@@ -3,7 +3,7 @@ import {Router} from 'express';
 
 const router = Router();
 
-const tasks = [];
+let tasks = [];
 
 router.get("/", (req, res) => {
     return res.status(200).json({
@@ -40,6 +40,17 @@ router.get("/task/:id", (req, res) => {
         data: {
             message: "ToDo task",
             task
+        }
+    })
+})
+
+router.delete("/task/:id", (req, res) => {
+    const title = req.params.id;
+
+    tasks = tasks.filter( (task) => ( task.title !== title));    
+    return res.status(200).json({
+        data: {
+            message: "task deleted succesfully"
         }
     })
 })
